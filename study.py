@@ -43,6 +43,7 @@ def requestUrl(url, values, post):
     try:
         response = urllib2.urlopen(request)
         print response.read()
+        return response.read()
     except urllib2.URLError, e:
         if hasattr(e,"code"):
             print e.code
@@ -56,7 +57,10 @@ def main():
     global values, url, data, headers, request, response
     values = {"username": "1016903103@qq.com", "password": "XXXX"}
     url = "http://www.t66y.com"
-    #requestUrl(url, values, False)
+    html = requestUrl(url, values, False)
+
+    soup = BeautifulSoup(html)
+    print soup.prettify()
 
     regixs()
 main()
